@@ -1,0 +1,54 @@
+{
+  "document_id": "dfa5b4de6137",
+  "source_path": "sample_inputs/title_objection_notes.txt",
+  "file_name": "title_objection_notes.txt",
+  "raw_text": "TITLE REVIEW NOTES (MESSY)\nMatter No: PSL-2026-0238\nBuyer: Ridge Harbor Capital LLC\nSeller: West 46th Street Holdings, Inc.\nSchedule B exceptions include utility easement recorded in Liber 4102.\nPossible encroachment noted on survey ???.\nClosing target: 06/30/2026.\nRecorded lien release reference: Ref: 2026-0142.\n[unclear] handwritten note about access drive.",
+  "structured_data": {
+    "document_type": "title review",
+    "dates": [
+      "06/30/2026"
+    ],
+    "parties": [
+      "Ridge Harbor Capital LLC",
+      "West 46th Street Holdings, Inc"
+    ],
+    "key_clauses": [
+      {
+        "topic": "closing",
+        "heading": "TITLE REVIEW NOTES (MESSY)",
+        "excerpt": "TITLE REVIEW NOTES (MESSY) Matter No: PSL-2026-0238 Buyer: Ridge Harbor Capital LLC Seller: West 46th Street Holdings, Inc. Schedule B exceptions include utility easement recorded in Liber 4102. Possible encroachment noted on survey ???. Closing target: 06/30/2026. Recorded lien..."
+      }
+    ],
+    "referenced_case_numbers": [
+      "PSL-2026-0238"
+    ],
+    "amounts": [],
+    "low_confidence_sections": [
+      {
+        "line": "6",
+        "text": "Possible encroachment noted on survey ???.",
+        "reason": "explicit illegibility marker"
+      },
+      {
+        "line": "9",
+        "text": "[unclear] handwritten note about access drive.",
+        "reason": "explicit illegibility marker"
+      }
+    ],
+    "missing_fields": []
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "TITLE REVIEW NOTES (MESSY)\nMatter No: PSL-2026-0238\nBuyer: Ridge Harbor Capital LLC\nSeller: West 46th Street Holdings, Inc.\nSchedule B exceptions include utility easement recorded in Liber 4102.\nPossible encroachment noted on survey ???.\nClosing target: 06/30/2026.\nRecorded lien release reference: Ref: 2026-0142.\n[unclear] handwritten note about access drive.",
+      "confidence": 0.76,
+      "extraction_method": "plain_text"
+    }
+  ],
+  "warnings": [],
+  "metadata": {
+    "processed_at": "2026-05-12T16:38:07+00:00",
+    "source_suffix": ".txt",
+    "page_count": 1
+  }
+}

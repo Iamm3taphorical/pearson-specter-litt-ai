@@ -1,6 +1,6 @@
 {
-  "index_id": "ebcf027f55c4",
-  "document_count": 5,
-  "chunk_count": 5,
+  "index_id": "472710fbf9de",
+  "document_count": 8,
+  "chunk_count": 12,
   "embedding_model": "local-tfidf"
 }

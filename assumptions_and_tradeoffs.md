@@ -12,6 +12,7 @@
 
 - The default embedding model is local sparse TF-IDF rather than OpenAI or sentence-transformer embeddings. This keeps the demo dependency-light and inspectable, but semantic recall is weaker.
 - OCR confidence is a mix of Tesseract TSV confidence when available and conservative heuristics for embedded text.
+- Confidence scoring is heuristic-only and not statistically calibrated; it is intended for demo triage rather than formal quality assurance.
 - Structured extraction uses deterministic regex and keyword rules. It is easy to audit, but not as flexible as a document-understanding model.
 - The deterministic draft generator is extractive. It prioritizes support and citations over polished language when no LLM key is available.
 - The REST API accepts local paths for feedback rather than implementing multipart upload.

@@ -27,6 +27,9 @@ Generated artifacts:
 - Simulated operator edit: `sample_outputs/operator_edited_draft.md`
 - Learned preferences: `data/preferences.json`
 - Improved draft: `sample_outputs/improved_draft_after_feedback.md`
+- Second-round operator edit: `sample_outputs/operator_edited_draft_round2.md`
+- Second-round improved draft: `sample_outputs/improved_draft_after_feedback_round2.md`
+- Second-round evidence: `sample_outputs/improved_evidence_round2.json`
 
 ## Commands
 
@@ -39,7 +42,11 @@ PYTHONPATH=src python -m legal_ai_workflow.cli process sample_inputs --output-di
 Build the retrieval index:
 
 ```bash
-PYTHONPATH=src python -m legal_ai_workflow.cli index --processed-dir data/processed --index-dir data/index
+PYTHONPATH=src python -m legal_ai_workflow.cli index \
+  --processed-dir data/processed \
+  --index-dir data/index \
+  --target-tokens 60 \
+  --overlap-tokens 20
 ```
 
 Generate a grounded first-pass internal memo:
@@ -49,7 +56,9 @@ PYTHONPATH=src python -m legal_ai_workflow.cli draft \
   "Prepare a first-pass internal memo summarizing title and notice risks." \
   --index-dir data/index \
   --preferences data/preferences.json \
-  --output sample_outputs/custom_draft.md
+  --output sample_outputs/custom_draft.md \
+  --min-score 0.0 \
+  --min-confidence 0.55
 ```
 
 Learn from an operator-edited draft:
@@ -99,7 +108,7 @@ PYTHONPATH=src python -m legal_ai_workflow.api --port 8000
 Endpoints:
 
 - `GET /health`
-- `POST /draft` with `{"query": "...", "top_k": 6, "use_llm": false}`
+- `POST /draft` with `{"query": "...", "top_k": 6, "min_score": 0.0, "min_confidence": 0.55, "use_llm": false}`
 - `POST /feedback` with `{"original": "path/to/original.md", "edited": "path/to/edited.md"}`
 
 ## Project Layout
@@ -118,6 +127,16 @@ sample_outputs/     Baseline, operator edit, improved draft, evidence maps
 tests/              Unit/integration tests
 ```
 
-## Submission Note
+## Sample Inputs
 
-The local `gh` login on this machine is invalid, so repository push, collaborator invites, and email sending require re-authentication or manual completion from the reviewer/developer account.
+The demo corpus currently includes:
+
+- `handwritten_meeting_notes.txt`
+- `lease_amendment_scan_transcript.txt`
+- `low_res_notice_attachment.png`
+- `notice_email_chain.txt`
+- `notice_scan_transcript.txt`
+- `synthetic_title_addendum.pdf`
+- `title_commitment_messy.txt`
+- `title_objection_notes.txt`
+

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 import sys
 from pathlib import Path
@@ -42,6 +43,8 @@ def build_parser() -> argparse.ArgumentParser:
     index = sub.add_parser("index", help="Build retrieval index from processed JSON")
     index.add_argument("--processed-dir", default="data/processed")
     index.add_argument("--index-dir", default="data/index")
+    index.add_argument("--target-tokens", type=int, default=120)
+    index.add_argument("--overlap-tokens", type=int, default=25)
     index.set_defaults(func=cmd_index)
 
     draft = sub.add_parser("draft", help="Generate a grounded first-pass memo")
@@ -51,6 +54,8 @@ def build_parser() -> argparse.ArgumentParser:
     draft.add_argument("--output", default="sample_outputs/draft.md")
     draft.add_argument("--evidence-output", default="sample_outputs/evidence.json")
     draft.add_argument("--top-k", type=int, default=6)
+    draft.add_argument("--min-score", type=float, default=0.0)
+    draft.add_argument("--min-confidence", type=float, default=None)
     draft.add_argument("--no-llm", action="store_true", help="Force deterministic local generation")
     draft.set_defaults(func=cmd_draft)
 
@@ -85,14 +90,24 @@ def cmd_process(args: argparse.Namespace) -> int:
 
 
 def cmd_index(args: argparse.Namespace) -> int:
-    store = build_index_from_processed(args.processed_dir, args.index_dir)
+    store = build_index_from_processed(
+        args.processed_dir,
+        args.index_dir,
+        target_tokens=int(args.target_tokens),
+        overlap_tokens=int(args.overlap_tokens),
+    )
     print(f"indexed {len(store.chunks)} chunks -> {Path(args.index_dir) / 'index.json'}")
     return 0
 
 
 def cmd_draft(args: argparse.Namespace) -> int:
     store = VectorStore.load(args.index_dir)
-    evidence = store.query(args.query, top_k=args.top_k)
+    evidence = store.query(
+        args.query,
+        top_k=args.top_k,
+        min_score=float(args.min_score),
+        min_confidence=args.min_confidence,
+    )
     preferences = PreferenceStore.load(args.preferences)
     generator = DraftGenerator(use_llm=not args.no_llm)
     draft = generator.generate(args.query, evidence, preferences)
@@ -123,7 +138,14 @@ def cmd_run_demo(args: argparse.Namespace) -> int:
             preferences_path.unlink()
 
     cmd_process(argparse.Namespace(input=args.sample_inputs, output_dir=str(processed_dir)))
-    cmd_index(argparse.Namespace(processed_dir=str(processed_dir), index_dir=str(index_dir)))
+    cmd_index(
+        argparse.Namespace(
+            processed_dir=str(processed_dir),
+            index_dir=str(index_dir),
+            target_tokens=60,
+            overlap_tokens=20,
+        )
+    )
 
     baseline_path = output_dir / "baseline_draft.md"
     baseline_evidence_path = output_dir / "baseline_evidence.json"
@@ -135,6 +157,8 @@ def cmd_run_demo(args: argparse.Namespace) -> int:
             output=str(baseline_path),
             evidence_output=str(baseline_evidence_path),
             top_k=6,
+            min_score=0.0,
+            min_confidence=None,
             no_llm=True,
         )
     )
@@ -160,9 +184,42 @@ def cmd_run_demo(args: argparse.Namespace) -> int:
             output=str(improved_path),
             evidence_output=str(improved_evidence_path),
             top_k=6,
+            min_score=0.0,
+            min_confidence=None,
             no_llm=True,
         )
     )
+
+    round_two_edit_path = output_dir / "operator_edited_draft_round2.md"
+    write_text(round_two_edit_path, _simulated_operator_edit(improved_path.read_text(encoding="utf-8")))
+    cmd_feedback(
+        argparse.Namespace(
+            original=str(improved_path),
+            edited=str(round_two_edit_path),
+            preferences=str(preferences_path),
+            log="data/feedback_events.jsonl",
+        )
+    )
+
+    improved_round_two_path = output_dir / "improved_draft_after_feedback_round2.md"
+    improved_round_two_evidence_path = output_dir / "improved_evidence_round2.json"
+    cmd_draft(
+        argparse.Namespace(
+            query=DEFAULT_QUERY,
+            index_dir=str(index_dir),
+            preferences=str(preferences_path),
+            output=str(improved_round_two_path),
+            evidence_output=str(improved_round_two_evidence_path),
+            top_k=6,
+            min_score=0.0,
+            min_confidence=None,
+            no_llm=True,
+        )
+    )
+
+    _print_metrics("baseline", baseline_path.read_text(encoding="utf-8"))
+    _print_metrics("improved", improved_path.read_text(encoding="utf-8"))
+    _print_metrics("improved_round2", improved_round_two_path.read_text(encoding="utf-8"))
 
     print("demo complete")
     return 0
@@ -181,12 +238,14 @@ def _simulated_operator_edit(baseline: str) -> str:
         "## Key Supported Facts",
         "",
     ]
-    for line in baseline.splitlines():
+    fact_lines = _extract_section_lines(baseline, "Key Supported Facts")
+    source_lines = fact_lines or baseline.splitlines()
+    for line in source_lines:
         if reuses_supported_fact(line):
-            normalized = line
-            if line[:3].isdigit() or line[:2] in {"1.", "2.", "3.", "4.", "5.", "6.", "7."}:
-                normalized = "- " + line.split(". ", 1)[-1]
-            lines.append(normalized if normalized.startswith("- ") else f"- {normalized.lstrip('- ')}")
+            normalized = line.strip()
+            normalized = re.sub(r"^\d+\.\s+", "", normalized)
+            normalized = re.sub(r"^[-*•]\s+", "", normalized)
+            lines.append(f"- {normalized}")
     lines.extend(
         [
             "",
@@ -204,7 +263,53 @@ def _simulated_operator_edit(baseline: str) -> str:
 
 
 def reuses_supported_fact(line: str) -> bool:
-    return bool(line.strip()) and "-C" in line and ("[" in line and "]" in line)
+    stripped = line.strip()
+    if not stripped:
+        return False
+    if stripped.startswith("|"):
+        return False
+    if stripped.startswith("#"):
+        return False
+    if stripped.lower().startswith("**drafting task:**"):
+        return False
+    return "-C" in stripped and ("[" in stripped and "]" in stripped)
+
+
+def _extract_section_lines(text: str, heading: str) -> list[str]:
+    lines = text.splitlines()
+    capture = False
+    collected: list[str] = []
+    heading_lower = heading.lower()
+    for line in lines:
+        line_stripped = line.strip()
+        if line_stripped.lower().startswith("## ") and heading_lower in line_stripped.lower():
+            capture = True
+            continue
+        if capture and line_stripped.startswith("## "):
+            break
+        if capture:
+            collected.append(line)
+    return collected
+
+
+def _draft_metrics(draft: str) -> dict[str, int]:
+    citations = len(re.findall(r"\[[A-Za-z0-9_-]+-C\d{3}(?:;[^\]]+)?\]", draft))
+    section_count = sum(1 for line in draft.splitlines() if line.strip().startswith("## "))
+    bullet_count = sum(1 for line in draft.splitlines() if line.lstrip().startswith("- "))
+    return {
+        "chars": len(draft),
+        "citations": citations,
+        "sections": section_count,
+        "bullets": bullet_count,
+    }
+
+
+def _print_metrics(label: str, draft: str) -> None:
+    metrics = _draft_metrics(draft)
+    print(
+        f"metrics[{label}]: chars={metrics['chars']}, citations={metrics['citations']}, "
+        f"sections={metrics['sections']}, bullets={metrics['bullets']}"
+    )
 
 
 if __name__ == "__main__":  # pragma: no cover

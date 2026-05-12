@@ -1,0 +1,52 @@
+{
+  "document_id": "66af148e958c",
+  "source_path": "sample_inputs/lease_amendment_scan_transcript.txt",
+  "file_name": "lease_amendment_scan_transcript.txt",
+  "raw_text": "LEASE AMENDMENT (SCAN TRANSCRIPT)\nDate: April 14, 2025\nLandlord: Parkside Holdings LLC\nTenant: Harborline Medical Group, P.C.\nLease No.: PSL-LEASE-2025-09\nPremises: 410 West 46th Street, Suite 12B\nRent: $18,750.00 per month\nNotice: Notices must be sent by certified mail to the addresses on page 3.\nTermination: Landlord may terminate after 30 days' notice for nonpayment.\n[illegible] signature block near last page\nParagraph 7: \"Assignment\" requires landlord consent.",
+  "structured_data": {
+    "document_type": null,
+    "dates": [
+      "April 14, 2025"
+    ],
+    "parties": [
+      "Harborline Medical Group, P.C",
+      "Parkside Holdings LLC"
+    ],
+    "key_clauses": [
+      {
+        "topic": "notice",
+        "heading": "LEASE AMENDMENT (SCAN TRANSCRIPT)",
+        "excerpt": "LEASE AMENDMENT (SCAN TRANSCRIPT) Date: April 14, 2025 Landlord: Parkside Holdings LLC Tenant: Harborline Medical Group, P.C. Lease No.: PSL-LEASE-2025-09 Premises: 410 West 46th Street, Suite 12B Rent: $18,750.00 per month Notice: Notices must be sent by certified mail to the a..."
+      }
+    ],
+    "referenced_case_numbers": [],
+    "amounts": [
+      "$18,750.00"
+    ],
+    "low_confidence_sections": [
+      {
+        "line": "10",
+        "text": "[illegible] signature block near last page",
+        "reason": "explicit illegibility marker"
+      }
+    ],
+    "missing_fields": [
+      "document_type",
+      "case_numbers"
+    ]
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "LEASE AMENDMENT (SCAN TRANSCRIPT)\nDate: April 14, 2025\nLandlord: Parkside Holdings LLC\nTenant: Harborline Medical Group, P.C.\nLease No.: PSL-LEASE-2025-09\nPremises: 410 West 46th Street, Suite 12B\nRent: $18,750.00 per month\nNotice: Notices must be sent by certified mail to the addresses on page 3.\nTermination: Landlord may terminate after 30 days' notice for nonpayment.\n[illegible] signature block near last page\nParagraph 7: \"Assignment\" requires landlord consent.",
+      "confidence": 0.85,
+      "extraction_method": "plain_text"
+    }
+  ],
+  "warnings": [],
+  "metadata": {
+    "processed_at": "2026-05-12T16:38:07+00:00",
+    "source_suffix": ".txt",
+    "page_count": 1
+  }
+}

@@ -195,6 +195,9 @@ class FeedbackLearner:
         edited_sentences = set(split_sentences(edited))
         removed = []
         for sentence in original_sentences:
+            # Skip headings/metadata/table rows that are not factual claims.
+            if self._is_non_factual_sentence(sentence):
+                continue
             if "[" in sentence and "]" in sentence:
                 continue
             if len(sentence) < 50:
@@ -203,6 +206,30 @@ class FeedbackLearner:
             if not closest:
                 removed.append(sentence)
         return removed
+
+    def _is_non_factual_sentence(self, sentence: str) -> bool:
+        stripped = sentence.strip()
+        if not stripped:
+            return True
+        if stripped.startswith("#"):
+            return True
+        if stripped.startswith("|"):
+            return True
+        lower = stripped.lower()
+        if lower.startswith("drafting task:"):
+            return True
+        if lower.startswith("generated "):
+            return True
+        if lower in {
+            "matter snapshot",
+            "key supported facts",
+            "document-driven issues",
+            "risk flags",
+            "gaps / unclear items",
+            "evidence map",
+        }:
+            return True
+        return False
 
     def _append_feedback_log(
         self,

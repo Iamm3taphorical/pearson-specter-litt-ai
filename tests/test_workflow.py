@@ -7,6 +7,7 @@ from pathlib import Path
 from legal_ai_workflow.feedback import FeedbackLearner, PreferenceStore
 from legal_ai_workflow.generation import DraftGenerator
 from legal_ai_workflow.ingestion import DocumentProcessor
+from legal_ai_workflow.models import Chunk
 from legal_ai_workflow.retrieval import Chunker, VectorStore
 
 
@@ -54,6 +55,65 @@ class WorkflowTests(unittest.TestCase):
         self.assertIn("include_risk_section", learned)
         self.assertTrue(store.is_enabled("prefer_bullets"))
         self.assertTrue(store.is_enabled("strict_citations"))
+
+    def test_empty_document_is_flagged(self) -> None:
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "empty.txt"
+            path.write_text("", encoding="utf-8")
+            document = DocumentProcessor().process_path(path)
+        self.assertFalse(document.raw_text)
+        self.assertTrue(any(warning.severity == "error" for warning in document.warnings))
+
+    def test_min_confidence_filter_excludes_low_confidence_chunks(self) -> None:
+        chunks = [
+            Chunk(
+                chunk_id="DOC-C001",
+                document_id="DOC",
+                source_path="sample.txt",
+                text="Notice is effective upon delivery.",
+                metadata={"confidence": 0.4},
+            ),
+            Chunk(
+                chunk_id="DOC-C002",
+                document_id="DOC",
+                source_path="sample.txt",
+                text="Utility easement recorded in Liber 4102.",
+                metadata={"confidence": 0.9},
+            ),
+        ]
+        store = VectorStore()
+        store.build(chunks)
+        results = store.query("easement", top_k=5, min_confidence=0.8)
+        self.assertEqual(len(results), 1)
+        self.assertEqual(results[0].chunk.chunk_id, "DOC-C002")
+
+    def test_empty_query_returns_no_evidence(self) -> None:
+        chunks = [
+            Chunk(
+                chunk_id="DOC-C001",
+                document_id="DOC",
+                source_path="sample.txt",
+                text="Notice is effective upon delivery.",
+                metadata={"confidence": 0.9},
+            )
+        ]
+        store = VectorStore()
+        store.build(chunks)
+        results = store.query("   ")
+        self.assertEqual(results, [])
+
+    def test_no_evidence_returns_insufficient_message(self) -> None:
+        draft = DraftGenerator(use_llm=False).generate("Prepare memo", [], PreferenceStore())
+        self.assertIn("No relevant evidence was retrieved", draft)
+
+    def test_preference_weights_accumulate(self) -> None:
+        original = "# Memo\n\nThis paragraph has no citations and is long enough to trigger strict citations logic."
+        edited = "# Memo\n\n- Short fact [ABC-C001].\n\n## Risk Flags\n- Review scans."
+        store = PreferenceStore()
+        learner = FeedbackLearner()
+        learner.learn_from_text(original, edited, store)
+        learner.learn_from_text(original, edited, store)
+        self.assertGreaterEqual(store.preferences["prefer_bullets"].weight, 2)
 
 
 if __name__ == "__main__":

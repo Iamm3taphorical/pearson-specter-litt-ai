@@ -1,7 +1,7 @@
 {
-  "document_id": "8f8d22a02979",
-  "source_path": "sample_inputs/low_res_notice_attachment.png",
-  "file_name": "low_res_notice_attachment.png",
+  "document_id": "6f705d655f0b",
+  "source_path": "sample_inputs/synthetic_title_addendum.pdf",
+  "file_name": "synthetic_title_addendum.pdf",
   "raw_text": "",
   "structured_data": {
     "document_type": null,
@@ -18,18 +18,11 @@
       "case_numbers"
     ]
   },
-  "pages": [
-    {
-      "page_number": 1,
-      "text": "",
-      "confidence": 0.0,
-      "extraction_method": "image_no_ocr"
-    }
-  ],
+  "pages": [],
   "warnings": [
     {
-      "message": "Image input requires OCR, but Tesseract is unavailable. File was accepted and flagged.",
-      "severity": "warning",
+      "message": "PyMuPDF is not installed; PDF text could not be extracted.",
+      "severity": "error",
       "page": null,
       "details": {}
     },
@@ -42,8 +35,8 @@
   ],
   "metadata": {
     "processed_at": "2026-05-12T16:38:07+00:00",
-    "source_suffix": ".png",
-    "page_count": 1,
-    "ocr_available": false
+    "source_suffix": ".pdf",
+    "page_count": 0,
+    "pdf_backend": "unavailable"
   }
 }

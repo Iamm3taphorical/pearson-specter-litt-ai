@@ -1,7 +1,7 @@
 [
   {
     "chunk": {
-      "chunk_id": "319c040caa6d-C001",
+      "chunk_id": "319c040caa6d-C002",
       "document_id": "319c040caa6d",
       "source_path": "sample_inputs/handwritten_meeting_notes.txt",
       "text": "HANDWRITTEN STYLE MEETING NOTES - TRANSCRIBED\nMatter: PSL-2026-0142\nParticipants: Harvey Specter; Rachel Zane; client representative from Ridge Harbor Capital LLC\nDate: May 4, 2026\n\nNotes:\n- Client wants a short memo before deciding whether to delay closing.\n- Rachel flagged the roof access notation as [unclear] because it may be tied to the utility easement.\n- Harvey asked team to confirm whether notice was actually delivered by overnight courier and email.\n- Do not state seller is in breach unless supported by the agreement and notice packet.\n- Add a risk section in future drafts if exceptions or unclear source text appear.",
@@ -13,32 +13,15 @@
         "document_type": "title review"
       }
     },
-    "score": 0.27099342006517657,
-    "citation": "[319c040caa6d-C001; p. 1]"
+    "score": 0.28416099456873606,
+    "citation": "[319c040caa6d-C002; p. 1]"
   },
   {
     "chunk": {
-      "chunk_id": "23d5228fe72c-C001",
-      "document_id": "23d5228fe72c",
-      "source_path": "sample_inputs/synthetic_title_addendum.pdf",
-      "text": "SYNTHETIC TITLE REVIEW ADDENDUM\nMatter No: PSL-2026-0142\nDate: May 6, 2026\nParties: Ridge Harbor Capital LLC and West 46th Street Holdings, Inc.\nAddendum: The title company confirmed the utility easement recorded in Liber 4102, Page 778\nremains open.\nThe addendum does not resolve the handwritten roof access notation. Counsel should verify the\noriginal scan.\nNotice Clause: courier and email delivery are both required before notice is effective.",
-      "metadata": {
-        "file_name": "synthetic_title_addendum.pdf",
-        "page": 1,
-        "confidence": 0.94,
-        "extraction_method": "pdf_text",
-        "document_type": null
-      }
-    },
-    "score": 0.14095137267226185,
-    "citation": "[23d5228fe72c-C001; p. 1]"
-  },
-  {
-    "chunk": {
-      "chunk_id": "e658ea3b0886-C002",
+      "chunk_id": "e658ea3b0886-C004",
       "document_id": "e658ea3b0886",
       "source_path": "sample_inputs/title_commitment_messy.txt",
-      "text": "Schedule B - Exceptions\n1. Taxes for calendar year 2026 are not yet due and payable.\n2. Utility easement recorded in Liber 4102, Page 778 affects the rear five feet of the parcel.\n3. Mortgage satisfaction for prior lender appears pending; payoff letter references File No: LND-88-204.\n4. [illegible] handwritten notation beside exception 7 appears to reference \"roof access\" but the scanned copy is unclear.\n\nKey Clause - Closing Deliverables\nSeller must deliver a payoff letter, tenant estoppel certificates, assignment of service contracts, and an owner's affidavit before closing.\n\nKey Clause - Notice\nAll notices must be sent by overnight courier and email to the parties listed on the signature page. Notice is effective on confirmed delivery.",
+      "text": "Key Clause - Closing Deliverables\nSeller must deliver a payoff letter, tenant estoppel certificates, assignment of service contracts, and an owner's affidavit before closing.\n\nKey Clause - Notice\nAll notices must be sent by overnight courier and email to the parties listed on the signature page. Notice is effective on confirmed delivery.",
       "metadata": {
         "file_name": "title_commitment_messy.txt",
         "page": 1,
@@ -47,15 +30,15 @@
         "document_type": "title review"
       }
     },
-    "score": 0.10298828144389717,
-    "citation": "[e658ea3b0886-C002; p. 1]"
+    "score": 0.14581247762944938,
+    "citation": "[e658ea3b0886-C004; p. 1]"
   },
   {
     "chunk": {
       "chunk_id": "2173674ed7c5-C001",
       "document_id": "2173674ed7c5",
       "source_path": "sample_inputs/notice_scan_transcript.txt",
-      "text": "NOTICE OF DEFAULT AND RIGHT TO CURE\n\nDate: May 1, 2026\nFrom: Pearson Specter Litt, counsel for Ridge Harbor Capital LLC\nTo: West 46th Street Holdings, Inc.\nMatter No: PSL-2026-0142\n\nThe buyer asserts that the seller has not delivered the mortgage satisfaction and tenant estoppel certificates required by the closing deliverables clause.\n\nThe seller has ten (10) business days after confirmed delivery of this notice to cure the default before the buyer may pursue remedies stated in the purchase agreement.\n\nOCR note: stamp at bottom is smudged; courier tracking number appears as 1Z-9A7-[?]-4021.",
+      "text": "NOTICE OF DEFAULT AND RIGHT TO CURE\n\nDate: May 1, 2026\nFrom: Pearson Specter Litt, counsel for Ridge Harbor Capital LLC\nTo: West 46th Street Holdings, Inc.\nMatter No: PSL-2026-0142\n\nThe buyer asserts that the seller has not delivered the mortgage satisfaction and tenant estoppel certificates required by the closing deliverables clause.",
       "metadata": {
         "file_name": "notice_scan_transcript.txt",
         "page": 1,
@@ -64,15 +47,49 @@
         "document_type": "notice-related summary"
       }
     },
-    "score": 0.0971334685146562,
+    "score": 0.13777513272850625,
     "citation": "[2173674ed7c5-C001; p. 1]"
   },
   {
     "chunk": {
-      "chunk_id": "e658ea3b0886-C001",
+      "chunk_id": "2173674ed7c5-C002",
+      "document_id": "2173674ed7c5",
+      "source_path": "sample_inputs/notice_scan_transcript.txt",
+      "text": "The buyer asserts that the seller has not delivered the mortgage satisfaction and tenant estoppel certificates required by the closing deliverables clause.\n\nThe seller has ten (10) business days after confirmed delivery of this notice to cure the default before the buyer may pursue remedies stated in the purchase agreement.",
+      "metadata": {
+        "file_name": "notice_scan_transcript.txt",
+        "page": 1,
+        "confidence": 0.85,
+        "extraction_method": "plain_text",
+        "document_type": "notice-related summary"
+      }
+    },
+    "score": 0.10938470997974377,
+    "citation": "[2173674ed7c5-C002; p. 1]"
+  },
+  {
+    "chunk": {
+      "chunk_id": "d6be2f686ed2-C001",
+      "document_id": "d6be2f686ed2",
+      "source_path": "sample_inputs/notice_email_chain.txt",
+      "text": "EMAIL CHAIN - NOTICE OF DEFAULT\nFrom: claims@ridgeharbor.com\nTo: ops@west46holdings.com\nDate: May 3, 2026\nSubject: Notice of Default - PSL-2026-0142\nBody: Please treat this email as notice of default. Cure period is 15 days from receipt.\nPayment due: $42,500.00 by 05/18/2026.\nDelivery method: email and overnight courier to 12 Hudson St., New York, NY.\nAttachment reference: \"Default Notice - revised draft\" (not included).",
+      "metadata": {
+        "file_name": "notice_email_chain.txt",
+        "page": 1,
+        "confidence": 0.94,
+        "extraction_method": "plain_text",
+        "document_type": "notice-related summary"
+      }
+    },
+    "score": 0.08593300197299093,
+    "citation": "[d6be2f686ed2-C001; p. 1]"
+  },
+  {
+    "chunk": {
+      "chunk_id": "e658ea3b0886-C003",
       "document_id": "e658ea3b0886",
       "source_path": "sample_inputs/title_commitment_messy.txt",
-      "text": "PEARSON SPECTER LITT - TITLE REVIEW PACKET\nMatter No: PSL-2026-0142\nClient: Ridge Harbor Capital LLC\nSeller: West 46th Street Holdings, Inc.\nBuyer: Ridge Harbor Capital LLC\nProperty: 1188 West 46th Street, New York, NY\n\nTitle Commitment dated April 24, 2026\nClosing target: May 20, 2026\nPurchase price: $18,400,000.00\n\nSchedule B - Exceptions\n1. Taxes for calendar year 2026 are not yet due and payable.\n2. Utility easement recorded in Liber 4102, Page 778 affects the rear five feet of the parcel.\n3. Mortgage satisfaction for prior lender appears pending; payoff letter references File No: LND-88-204.\n4. [illegible] handwritten notation beside exception 7 appears to reference \"roof access\" but the scanned copy is unclear.",
+      "text": "Schedule B - Exceptions\n1. Taxes for calendar year 2026 are not yet due and payable.\n2. Utility easement recorded in Liber 4102, Page 778 affects the rear five feet of the parcel.\n3. Mortgage satisfaction for prior lender appears pending; payoff letter references File No: LND-88-204.\n4. [illegible] handwritten notation beside exception 7 appears to reference \"roof access\" but the scanned copy is unclear.\n\nKey Clause - Closing Deliverables\nSeller must deliver a payoff letter, tenant estoppel certificates, assignment of service contracts, and an owner's affidavit before closing.",
       "metadata": {
         "file_name": "title_commitment_messy.txt",
         "page": 1,
@@ -81,7 +98,7 @@
         "document_type": "title review"
       }
     },
-    "score": 0.06471725521177357,
-    "citation": "[e658ea3b0886-C001; p. 1]"
+    "score": 0.07419871311459639,
+    "citation": "[e658ea3b0886-C003; p. 1]"
   }
 ]

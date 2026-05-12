@@ -1,0 +1,44 @@
+{
+  "document_id": "d6be2f686ed2",
+  "source_path": "sample_inputs/notice_email_chain.txt",
+  "file_name": "notice_email_chain.txt",
+  "raw_text": "EMAIL CHAIN - NOTICE OF DEFAULT\nFrom: claims@ridgeharbor.com\nTo: ops@west46holdings.com\nDate: May 3, 2026\nSubject: Notice of Default - PSL-2026-0142\nBody: Please treat this email as notice of default. Cure period is 15 days from receipt.\nPayment due: $42,500.00 by 05/18/2026.\nDelivery method: email and overnight courier to 12 Hudson St., New York, NY.\nAttachment reference: \"Default Notice - revised draft\" (not included).",
+  "structured_data": {
+    "document_type": "notice-related summary",
+    "dates": [
+      "05/18/2026",
+      "May 3, 2026"
+    ],
+    "parties": [],
+    "key_clauses": [
+      {
+        "topic": "notice",
+        "heading": "EMAIL CHAIN - NOTICE OF DEFAULT",
+        "excerpt": "EMAIL CHAIN - NOTICE OF DEFAULT From: claims@ridgeharbor.com To: ops@west46holdings.com Date: May 3, 2026 Subject: Notice of Default - PSL-2026-0142 Body: Please treat this email as notice of default. Cure period is 15 days from receipt. Payment due: $42,500.00 by 05/18/2026. De..."
+      }
+    ],
+    "referenced_case_numbers": [],
+    "amounts": [
+      "$42,500.00"
+    ],
+    "low_confidence_sections": [],
+    "missing_fields": [
+      "parties",
+      "case_numbers"
+    ]
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "EMAIL CHAIN - NOTICE OF DEFAULT\nFrom: claims@ridgeharbor.com\nTo: ops@west46holdings.com\nDate: May 3, 2026\nSubject: Notice of Default - PSL-2026-0142\nBody: Please treat this email as notice of default. Cure period is 15 days from receipt.\nPayment due: $42,500.00 by 05/18/2026.\nDelivery method: email and overnight courier to 12 Hudson St., New York, NY.\nAttachment reference: \"Default Notice - revised draft\" (not included).",
+      "confidence": 0.94,
+      "extraction_method": "plain_text"
+    }
+  ],
+  "warnings": [],
+  "metadata": {
+    "processed_at": "2026-05-12T16:38:07+00:00",
+    "source_suffix": ".txt",
+    "page_count": 1
+  }
+}

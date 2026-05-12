@@ -11,9 +11,7 @@
 - Notes: - Client wants a short memo before deciding whether to delay closing. - Rachel flagged the roof access notation as [unclear] because it may be tied to the utility easement. - Harvey asked team to confirm whether notice was actually... [319c040caa6d-C002; p. 1]
 - Key Clause - Notice All notices must be sent by overnight courier and email to the parties listed on the signature page. [e658ea3b0886-C004; p. 1]
 - Notice is effective on confirmed delivery. [e658ea3b0886-C004; p. 1]
-- NOTICE OF DEFAULT AND RIGHT TO CURE [2173674ed7c5-C001; p. 1]
 - Key Clause - Closing Deliverables Seller must deliver a payoff letter, tenant estoppel certificates, assignment of service contracts, and an owner's affidavit before closing. [e658ea3b0886-C004; p. 1]
-- Date: May 1, 2026 From: Pearson Specter Litt, counsel for Ridge Harbor Capital LLC To: West 46th Street Holdings, Inc. [2173674ed7c5-C001; p. 1]
 
 ## Risk Flags
 

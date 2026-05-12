@@ -44,8 +44,11 @@ class WorkflowHandler(BaseHTTPRequestHandler):
     def _draft(self, payload: dict[str, object]) -> None:
         query = str(payload.get("query") or "Prepare a first-pass internal memo.")
         top_k = int(payload.get("top_k") or 6)
+        min_score = float(payload.get("min_score") or 0.0)
+        min_confidence = payload.get("min_confidence")
+        min_confidence_value = float(min_confidence) if min_confidence is not None else None
         store = VectorStore.load(self.index_dir)
-        evidence = store.query(query, top_k=top_k)
+        evidence = store.query(query, top_k=top_k, min_score=min_score, min_confidence=min_confidence_value)
         preferences = PreferenceStore.load(self.preferences_path)
         draft = DraftGenerator(use_llm=bool(payload.get("use_llm", False))).generate(query, evidence, preferences)
         self._json({"draft": draft, "evidence": [item.to_dict() for item in evidence]})

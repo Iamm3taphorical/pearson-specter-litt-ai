@@ -110,11 +110,14 @@ Remember: cite every factual claim using the chunk id provided above."""
             lines.append("This draft uses only retrieved source passages and flags gaps instead of filling them.")
         lines.extend(["", "## Key Supported Facts", ""])
 
-        fact_items = self._supported_fact_items(evidence, max_items=5 if concise else 7)
-        if prefer_bullets:
-            lines.extend(f"- {item}" for item in fact_items)
-        else:
-            lines.extend(f"{index}. {item}" for index, item in enumerate(fact_items, start=1))
+        fact_groups = self._supported_fact_items(evidence, max_items=5 if concise else 7)
+        for topic, items in fact_groups.items():
+            lines.extend([f"### {topic}", ""])
+            if prefer_bullets:
+                lines.extend(f"- {item}" for item in items)
+            else:
+                lines.extend(f"{index}. {item}" for index, item in enumerate(items, start=1))
+            lines.append("")
 
         lines.extend(["", "## Document-Driven Issues", ""])
         issues = self._issue_items(evidence, strict_citations=strict_citations)
@@ -137,9 +140,10 @@ Remember: cite every factual claim using the chunk id provided above."""
         lines.extend(["", f"_Generated locally at {utc_now_iso()} using retrieval-only evidence._", ""])
         return "\n".join(lines)
 
-    def _supported_fact_items(self, evidence: list[RetrievalResult], max_items: int) -> list[str]:
-        items: list[str] = []
+    def _supported_fact_items(self, evidence: list[RetrievalResult], max_items: int) -> dict[str, list[str]]:
+        items_by_topic: dict[str, list[str]] = {}
         seen: set[str] = set()
+        total = 0
         for result in evidence:
             for sentence in split_sentences(result.chunk.text):
                 if len(sentence) < 35:
@@ -149,21 +153,46 @@ Remember: cite every factual claim using the chunk id provided above."""
                 if fingerprint in seen:
                     continue
                 seen.add(fingerprint)
-                items.append(f"{short_quote(cleaned, 240)} {result.citation()}")
-                if len(items) >= max_items:
-                    return items
-        return items or [f"The retrieved material is too short to extract stable fact statements {evidence[0].citation()}."]
+                topic = self._topic_for_sentence(cleaned)
+                items_by_topic.setdefault(topic, []).append(f"{short_quote(cleaned, 240)} {result.citation()}")
+                total += 1
+                if total >= max_items:
+                    return items_by_topic
+        if not items_by_topic:
+            items_by_topic["Other Facts"] = [
+                f"The retrieved material is too short to extract stable fact statements {evidence[0].citation()}."
+            ]
+        return items_by_topic
 
     def _issue_items(self, evidence: list[RetrievalResult], strict_citations: bool) -> list[str]:
         issue_terms = ("default", "notice", "exception", "easement", "termination", "deadline", "closing", "unclear", "illegible", "payment")
         items: list[str] = []
+        seen_terms: set[str] = set()
         for result in evidence:
             lower = result.chunk.text.lower()
-            if any(term in lower for term in issue_terms):
-                items.append(f"Review source language concerning {self._first_matching_term(lower, issue_terms)} before relying on the draft {result.citation()}.")
+            matched = self._first_matching_term(lower, issue_terms)
+            if matched in seen_terms:
+                continue
+            if matched != "retrieved issue":
+                seen_terms.add(matched)
+                items.append(f"Review source language concerning {matched} before relying on the draft {result.citation()}.")
         if strict_citations:
             items.append("Do not add uncited factual or legal conclusions during review; unsupported assertions should remain in gaps.")
         return items[:5] or [f"No specific issue language was retrieved; human review should confirm whether the query needs broader evidence {evidence[0].citation()}."]
+
+    def _topic_for_sentence(self, sentence: str) -> str:
+        lower = sentence.lower()
+        topic_keywords = [
+            ("Notice / Default", ("notice", "default", "cure", "delivery")),
+            ("Title / Easement", ("title", "easement", "exception", "schedule b", "lien", "liber")),
+            ("Parties", ("buyer", "seller", "borrower", "lender", "landlord", "tenant", "plaintiff", "defendant", "grantor", "grantee", "client", "counterparty", "party")),
+            ("Dates / Deadlines", ("date", "deadline", "closing", "effective", "recorded", "may", "june", "july", "aug", "sept", "oct", "nov", "dec")),
+            ("Payments", ("payment", "amount", "fee", "rent", "$")),
+        ]
+        for topic, keywords in topic_keywords:
+            if any(keyword in lower for keyword in keywords):
+                return topic
+        return "Other Facts"
 
     def _risk_items(self, evidence: list[RetrievalResult]) -> list[str]:
         risks: list[str] = []

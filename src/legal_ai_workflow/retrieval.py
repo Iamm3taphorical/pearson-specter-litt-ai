@@ -169,13 +169,29 @@ class VectorStore:
         self.embedding_model.fit([chunk.text for chunk in chunks])
         self.vectors = [self.embedding_model.embed(chunk.text) for chunk in chunks]
 
-    def query(self, query: str, top_k: int = 6, min_score: float = 0.0) -> list[RetrievalResult]:
+    def query(
+        self,
+        query: str,
+        top_k: int = 6,
+        min_score: float = 0.0,
+        min_confidence: float | None = None,
+    ) -> list[RetrievalResult]:
         query_vector = self.embedding_model.embed(query)
+        if not query_vector:
+            return []
         scored = [
             RetrievalResult(chunk=chunk, score=sparse_cosine(query_vector, vector))
             for chunk, vector in zip(self.chunks, self.vectors)
         ]
+        if min_confidence is not None:
+            scored = [
+                item
+                for item in scored
+                if float(item.chunk.metadata.get("confidence", 1.0)) >= min_confidence
+            ]
         scored.sort(key=lambda item: item.score, reverse=True)
+        if scored and scored[0].score <= 0.0:
+            return []
         return [item for item in scored if item.score >= min_score][:top_k]
 
     def save(self, index_dir: str | Path) -> None:
@@ -206,9 +222,15 @@ def load_processed_documents(processed_dir: str | Path) -> list[ProcessedDocumen
     return documents
 
 
-def build_index_from_processed(processed_dir: str | Path, index_dir: str | Path) -> VectorStore:
+def build_index_from_processed(
+    processed_dir: str | Path,
+    index_dir: str | Path,
+    *,
+    target_tokens: int = 120,
+    overlap_tokens: int = 25,
+) -> VectorStore:
     documents = load_processed_documents(processed_dir)
-    chunks = Chunker().chunk_documents(documents)
+    chunks = Chunker(target_tokens=target_tokens, overlap_tokens=overlap_tokens).chunk_documents(documents)
     store = VectorStore()
     store.build(chunks)
     store.save(index_dir)

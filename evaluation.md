@@ -11,17 +11,20 @@ PYTHONPATH=src python3 -m legal_ai_workflow.cli run-demo --reset
 Result: all tests passed.
 
 ```text
-Ran 3 tests in 0.003s
+Ran 8 tests in 0.002s
 OK
 ```
 
 ## Demo Corpus
 
-The demo processed five sample inputs:
+The demo processed eight sample inputs:
 
 - `title_commitment_messy.txt`
 - `notice_scan_transcript.txt`
 - `handwritten_meeting_notes.txt`
+- `lease_amendment_scan_transcript.txt`
+- `notice_email_chain.txt`
+- `title_objection_notes.txt`
 - `synthetic_title_addendum.pdf`
 - `low_res_notice_attachment.png`
 
@@ -29,8 +32,8 @@ The PNG was accepted and flagged because Tesseract is not installed in this envi
 
 ## Processing Results
 
-- Documents processed: 5
-- Indexed chunks: 5
+- Documents processed: 8
+- Indexed chunks: 12 with the demo target token size (60).
 - Embedding model: `local-tfidf`
 - Structured extraction found dates, parties, matter/file numbers, key clauses, amounts, and low-confidence sections in the text/PDF samples.
 - Low-confidence examples were preserved in processed JSON instead of silently removed.
@@ -43,6 +46,7 @@ Evidence trace files:
 
 - `sample_outputs/baseline_evidence.json`
 - `sample_outputs/improved_evidence.json`
+- `sample_outputs/improved_evidence_round2.json`
 
 Each evidence record includes source file, chunk ID, score, page, extraction confidence, extraction method, and passage text.
 
@@ -60,6 +64,16 @@ Visible improvement:
 - Baseline draft uses numbered facts and no dedicated `Risk Flags` section.
 - Improved draft uses bullet formatting and adds a source-cited `Risk Flags` section.
 - Future LLM prompts also receive the learned rules and recent edit examples.
+- The demo runs a second simulated edit so preference weights increase and the improved draft evolves again.
+
+## Draft Metrics
+
+The demo prints lightweight metrics for the baseline, improved, and round-two drafts:
+
+- Total character length
+- Citation count
+- Section count
+- Bullet count
 
 ## Quality Checks
 

@@ -1,6 +1,15 @@
 {
   "version": 1,
   "preferences": {
+    "concise_default": {
+      "preference_id": "concise_default",
+      "description": "Keep future drafts concise unless the query asks for detailed narrative.",
+      "weight": 2,
+      "examples": [
+        "Operator shortened the draft."
+      ],
+      "updated_at": "2026-05-12T16:38:07+00:00"
+    },
     "include_risk_section": {
       "preference_id": "include_risk_section",
       "description": "Include a distinct Risk Flags section when source evidence supports risks, uncertainty, deadlines, defaults, or exceptions.",
@@ -8,7 +17,7 @@
       "examples": [
         "Operator added a risk section."
       ],
-      "updated_at": "2026-05-12T15:14:30+00:00"
+      "updated_at": "2026-05-12T16:38:07+00:00"
     },
     "prefer_bullets": {
       "preference_id": "prefer_bullets",
@@ -17,25 +26,25 @@
       "examples": [
         "Operator converted prose into bullets."
       ],
-      "updated_at": "2026-05-12T15:14:30+00:00"
+      "updated_at": "2026-05-12T16:38:07+00:00"
     },
     "respect_operator_section_order": {
       "preference_id": "respect_operator_section_order",
       "description": "Reuse the operator's accepted section order when generating the same draft type.",
-      "weight": 1,
+      "weight": 2,
       "examples": [
         "Operator reordered headings."
       ],
-      "updated_at": "2026-05-12T15:14:30+00:00"
+      "updated_at": "2026-05-12T16:38:07+00:00"
     },
     "strict_citations": {
       "preference_id": "strict_citations",
       "description": "Avoid unsupported claims; every factual statement should carry a citation or be moved to gaps.",
-      "weight": 1,
+      "weight": 2,
       "examples": [
         "Operator removed uncited sentence: **Drafting task:** Prepare a first-pass internal memo summarizing title, notice, party, date, and risk facts supported by the uploaded documents."
       ],
-      "updated_at": "2026-05-12T15:14:30+00:00"
+      "updated_at": "2026-05-12T16:38:07+00:00"
     }
   },
   "section_order": [
@@ -47,9 +56,14 @@
   ],
   "examples": [
     {
-      "original_excerpt": "# First-Pass Internal Memo\n\n**Drafting task:** Prepare a first-pass internal memo summarizing title, notice, party, date, and risk facts supported by the uploaded documents.\n\n## Matter Snapshot\n\nThe strongest available source is `handwritten_meeting_notes.txt` with retrieval score 0.271 [319c040caa6d-C001; p. 1].\n\nThis draft uses only retrieved source passages and flags gaps instead of filling them.\n\n## Key Supported Facts\n\n1. HANDWRITTEN STYLE MEETING NOTES - TRANSCRIBED Matter: PSL-2026-0142 Participants: Harvey Specter; Rachel Zane; client representative from Ridge Harbor Capital LLC Date: May 4, 2026 [319c040caa6d-C001; p. 1]\n2. Notes: - Client wants a short memo before deciding whether to delay closing. - Rachel flagged the roof access notation as [unclear] because it may be tied to the utility easement. - Harvey asked team to confirm whether notice was actually... [319c040caa6d-C00",
-      "edited_excerpt": "# First-Pass Internal Memo\n\n## Matter Snapshot\n\n- Use bullet points by default so reviewers can scan source-backed facts quickly.\n- Keep unsupported legal conclusions out of the draft unless they are tied to a retrieved citation.\n\n## Key Supported Facts\n\n- The strongest available source is `handwritten_meeting_notes.txt` with retrieval score 0.271 [319c040caa6d-C001; p. 1].\n- HANDWRITTEN STYLE MEETING NOTES - TRANSCRIBED Matter: PSL-2026-0142 Participants: Harvey Specter; Rachel Zane; client representative from Ridge Harbor Capital LLC Date: May 4, 2026 [319c040caa6d-C001; p. 1]\n- Notes: - Client wants a short memo before deciding whether to delay closing. - Rachel flagged the roof access notation as [unclear] because it may be tied to the utility easement. - Harvey asked team to confirm whether notice was actually... [319c040caa6d-C001; p. 1]\n- SYNTHETIC TITLE REVIEW ADDENDUM Matter No:",
-      "captured_at": "2026-05-12T15:14:30+00:00"
+      "original_excerpt": "# First-Pass Internal Memo\n\n**Drafting task:** Prepare a first-pass internal memo summarizing title, notice, party, date, and risk facts supported by the uploaded documents.\n\n## Matter Snapshot\n\nThe strongest available source is `handwritten_meeting_notes.txt` with retrieval score 0.284 [319c040caa6d-C002; p. 1].\n\nThis draft uses only retrieved source passages and flags gaps instead of filling them.\n\n## Key Supported Facts\n\n### Title / Easement\n\n1. HANDWRITTEN STYLE MEETING NOTES - TRANSCRIBED Matter: PSL-2026-0142 Participants: Harvey Specter; Rachel Zane; client representative from Ridge Harbor Capital LLC Date: May 4, 2026 [319c040caa6d-C002; p. 1]\n\n### Notice / Default\n\n1. Notes: - Client wants a short memo before deciding whether to delay closing. - Rachel flagged the roof access notation as [unclear] because it may be tied to the utility easement. - Harvey asked team to confirm whe",
+      "edited_excerpt": "# First-Pass Internal Memo\n\n## Matter Snapshot\n\n- Use bullet points by default so reviewers can scan source-backed facts quickly.\n- Keep unsupported legal conclusions out of the draft unless they are tied to a retrieved citation.\n\n## Key Supported Facts\n\n- HANDWRITTEN STYLE MEETING NOTES - TRANSCRIBED Matter: PSL-2026-0142 Participants: Harvey Specter; Rachel Zane; client representative from Ridge Harbor Capital LLC Date: May 4, 2026 [319c040caa6d-C002; p. 1]\n- Notes: - Client wants a short memo before deciding whether to delay closing. - Rachel flagged the roof access notation as [unclear] because it may be tied to the utility easement. - Harvey asked team to confirm whether notice was actually... [319c040caa6d-C002; p. 1]\n- Key Clause - Notice All notices must be sent by overnight courier and email to the parties listed on the signature page. [e658ea3b0886-C004; p. 1]\n- Notice is effec",
+      "captured_at": "2026-05-12T16:38:07+00:00"
+    },
+    {
+      "original_excerpt": "# First-Pass Internal Memo\n\n**Drafting task:** Prepare a first-pass internal memo summarizing title, notice, party, date, and risk facts supported by the uploaded documents.\n\n## Matter Snapshot\n\n- The strongest available source is `handwritten_meeting_notes.txt` with retrieval score 0.284 [319c040caa6d-C002; p. 1].\n- This draft uses only retrieved source passages and flags gaps instead of filling them.\n\n## Key Supported Facts\n\n### Title / Easement\n\n- HANDWRITTEN STYLE MEETING NOTES - TRANSCRIBED Matter: PSL-2026-0142 Participants: Harvey Specter; Rachel Zane; client representative from Ridge Harbor Capital LLC Date: May 4, 2026 [319c040caa6d-C002; p. 1]\n\n### Notice / Default\n\n- Notes: - Client wants a short memo before deciding whether to delay closing. - Rachel flagged the roof access notation as [unclear] because it may be tied to the utility easement. - Harvey asked team to confirm wh",
+      "edited_excerpt": "# First-Pass Internal Memo\n\n## Matter Snapshot\n\n- Use bullet points by default so reviewers can scan source-backed facts quickly.\n- Keep unsupported legal conclusions out of the draft unless they are tied to a retrieved citation.\n\n## Key Supported Facts\n\n- HANDWRITTEN STYLE MEETING NOTES - TRANSCRIBED Matter: PSL-2026-0142 Participants: Harvey Specter; Rachel Zane; client representative from Ridge Harbor Capital LLC Date: May 4, 2026 [319c040caa6d-C002; p. 1]\n- Notes: - Client wants a short memo before deciding whether to delay closing. - Rachel flagged the roof access notation as [unclear] because it may be tied to the utility easement. - Harvey asked team to confirm whether notice was actually... [319c040caa6d-C002; p. 1]\n- Key Clause - Notice All notices must be sent by overnight courier and email to the parties listed on the signature page. [e658ea3b0886-C004; p. 1]\n- Notice is effec",
+      "captured_at": "2026-05-12T16:38:07+00:00"
     }
   ]
 }

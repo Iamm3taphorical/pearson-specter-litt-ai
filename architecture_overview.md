@@ -44,6 +44,19 @@ FeedbackLearner
 Future DraftGenerator runs apply learned preferences
 ```
 
+```mermaid
+flowchart TD
+   A[sample_inputs/] --> B[DocumentProcessor]
+   B --> C[data/processed/*.json]
+   C --> D[Chunker + VectorStore]
+   D --> E[Retriever]
+   E --> F[DraftGenerator]
+   F --> G[sample_outputs/*.md + evidence JSON]
+   G --> H[FeedbackLearner]
+   H --> I[PreferenceStore]
+   I --> F
+```
+
 ## Component Mapping
 
 1. Document Processing: `DocumentProcessor`, `TesseractOCR`, and `StructuredDataExtractor` in `src/legal_ai_workflow/ingestion.py`.

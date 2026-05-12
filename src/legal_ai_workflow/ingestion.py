@@ -351,6 +351,7 @@ class DocumentProcessor:
         cleaned = normalize_text(text)
         if not cleaned:
             return 0.0
+        # Heuristic score: start from method-based baseline and penalize low-signal text.
         base = 0.94 if method in {"plain_text", "pdf_text"} else 0.74
         marker_penalty = 0.09 * sum(cleaned.lower().count(marker) for marker in ("[illegible]", "[unclear]", "[?]", "???", "____"))
         alpha_ratio = sum(1 for char in cleaned if char.isalpha()) / max(len(cleaned), 1)
