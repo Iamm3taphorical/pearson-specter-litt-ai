@@ -1,0 +1,58 @@
+{
+  "document_id": "2173674ed7c5",
+  "source_path": "sample_inputs/notice_scan_transcript.txt",
+  "file_name": "notice_scan_transcript.txt",
+  "raw_text": "NOTICE OF DEFAULT AND RIGHT TO CURE\n\nDate: May 1, 2026\nFrom: Pearson Specter Litt, counsel for Ridge Harbor Capital LLC\nTo: West 46th Street Holdings, Inc.\nMatter No: PSL-2026-0142\n\nThe buyer asserts that the seller has not delivered the mortgage satisfaction and tenant estoppel certificates required by the closing deliverables clause.\n\nThe seller has ten (10) business days after confirmed delivery of this notice to cure the default before the buyer may pursue remedies stated in the purchase agreement.\n\nOCR note: stamp at bottom is smudged; courier tracking number appears as 1Z-9A7-[?]-4021.",
+  "structured_data": {
+    "document_type": "notice-related summary",
+    "dates": [
+      "May 1, 2026"
+    ],
+    "parties": [],
+    "key_clauses": [
+      {
+        "topic": "notice",
+        "heading": "NOTICE OF DEFAULT AND RIGHT TO CURE",
+        "excerpt": "NOTICE OF DEFAULT AND RIGHT TO CURE"
+      },
+      {
+        "topic": "closing",
+        "heading": "Closing",
+        "excerpt": "The buyer asserts that the seller has not delivered the mortgage satisfaction and tenant estoppel certificates required by the closing deliverables clause."
+      },
+      {
+        "topic": "notice",
+        "heading": "Notice",
+        "excerpt": "The seller has ten (10) business days after confirmed delivery of this notice to cure the default before the buyer may pursue remedies stated in the purchase agreement."
+      }
+    ],
+    "referenced_case_numbers": [
+      "PSL-2026-0142"
+    ],
+    "amounts": [],
+    "low_confidence_sections": [
+      {
+        "line": "12",
+        "text": "OCR note: stamp at bottom is smudged; courier tracking number appears as 1Z-9A7-[?]-4021.",
+        "reason": "explicit illegibility marker"
+      }
+    ],
+    "missing_fields": [
+      "parties"
+    ]
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "NOTICE OF DEFAULT AND RIGHT TO CURE\n\nDate: May 1, 2026\nFrom: Pearson Specter Litt, counsel for Ridge Harbor Capital LLC\nTo: West 46th Street Holdings, Inc.\nMatter No: PSL-2026-0142\n\nThe buyer asserts that the seller has not delivered the mortgage satisfaction and tenant estoppel certificates required by the closing deliverables clause.\n\nThe seller has ten (10) business days after confirmed delivery of this notice to cure the default before the buyer may pursue remedies stated in the purchase agreement.\n\nOCR note: stamp at bottom is smudged; courier tracking number appears as 1Z-9A7-[?]-4021.",
+      "confidence": 0.85,
+      "extraction_method": "plain_text"
+    }
+  ],
+  "warnings": [],
+  "metadata": {
+    "processed_at": "2026-05-12T15:14:30+00:00",
+    "source_suffix": ".txt",
+    "page_count": 1
+  }
+}
