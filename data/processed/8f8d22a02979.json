@@ -1,0 +1,49 @@
+{
+  "document_id": "8f8d22a02979",
+  "source_path": "sample_inputs/low_res_notice_attachment.png",
+  "file_name": "low_res_notice_attachment.png",
+  "raw_text": "",
+  "structured_data": {
+    "document_type": null,
+    "dates": [],
+    "parties": [],
+    "key_clauses": [],
+    "referenced_case_numbers": [],
+    "amounts": [],
+    "low_confidence_sections": [],
+    "missing_fields": [
+      "document_type",
+      "dates",
+      "parties",
+      "case_numbers"
+    ]
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "",
+      "confidence": 0.0,
+      "extraction_method": "image_no_ocr"
+    }
+  ],
+  "warnings": [
+    {
+      "message": "Image input requires OCR, but Tesseract is unavailable. File was accepted and flagged.",
+      "severity": "warning",
+      "page": null,
+      "details": {}
+    },
+    {
+      "message": "No usable text was extracted. Downstream generation should report insufficient evidence.",
+      "severity": "error",
+      "page": null,
+      "details": {}
+    }
+  ],
+  "metadata": {
+    "processed_at": "2026-05-12T15:14:30+00:00",
+    "source_suffix": ".png",
+    "page_count": 1,
+    "ocr_available": false
+  }
+}

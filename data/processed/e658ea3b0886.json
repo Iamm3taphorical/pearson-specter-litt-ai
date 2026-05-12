@@ -1,0 +1,73 @@
+{
+  "document_id": "e658ea3b0886",
+  "source_path": "sample_inputs/title_commitment_messy.txt",
+  "file_name": "title_commitment_messy.txt",
+  "raw_text": "PEARSON SPECTER LITT - TITLE REVIEW PACKET\nMatter No: PSL-2026-0142\nClient: Ridge Harbor Capital LLC\nSeller: West 46th Street Holdings, Inc.\nBuyer: Ridge Harbor Capital LLC\nProperty: 1188 West 46th Street, New York, NY\n\nTitle Commitment dated April 24, 2026\nClosing target: May 20, 2026\nPurchase price: $18,400,000.00\n\nSchedule B - Exceptions\n1. Taxes for calendar year 2026 are not yet due and payable.\n2. Utility easement recorded in Liber 4102, Page 778 affects the rear five feet of the parcel.\n3. Mortgage satisfaction for prior lender appears pending; payoff letter references File No: LND-88-204.\n4. [illegible] handwritten notation beside exception 7 appears to reference \"roof access\" but the scanned copy is unclear.\n\nKey Clause - Closing Deliverables\nSeller must deliver a payoff letter, tenant estoppel certificates, assignment of service contracts, and an owner's affidavit before closing.\n\nKey Clause - Notice\nAll notices must be sent by overnight courier and email to the parties listed on the signature page. Notice is effective on confirmed delivery.",
+  "structured_data": {
+    "document_type": "title review",
+    "dates": [
+      "April 24, 2026",
+      "May 20, 2026"
+    ],
+    "parties": [
+      "Ridge Harbor Capital LLC",
+      "West 46th Street Holdings, Inc"
+    ],
+    "key_clauses": [
+      {
+        "topic": "title",
+        "heading": "PEARSON SPECTER LITT - TITLE REVIEW PACKET",
+        "excerpt": "PEARSON SPECTER LITT - TITLE REVIEW PACKET Matter No: PSL-2026-0142 Client: Ridge Harbor Capital LLC Seller: West 46th Street Holdings, Inc. Buyer: Ridge Harbor Capital LLC Property: 1188 West 46th Street, New York, NY"
+      },
+      {
+        "topic": "closing",
+        "heading": "Title Commitment dated April 24, 2026",
+        "excerpt": "Title Commitment dated April 24, 2026 Closing target: May 20, 2026 Purchase price: $18,400,000.00"
+      },
+      {
+        "topic": "exceptions",
+        "heading": "Schedule B - Exceptions",
+        "excerpt": "Schedule B - Exceptions 1. Taxes for calendar year 2026 are not yet due and payable. 2. Utility easement recorded in Liber 4102, Page 778 affects the rear five feet of the parcel. 3. Mortgage satisfaction for prior lender appears pending; payoff letter references File No: LND-88..."
+      },
+      {
+        "topic": "closing",
+        "heading": "Key Clause - Closing Deliverables",
+        "excerpt": "Key Clause - Closing Deliverables Seller must deliver a payoff letter, tenant estoppel certificates, assignment of service contracts, and an owner's affidavit before closing."
+      },
+      {
+        "topic": "notice",
+        "heading": "Key Clause - Notice",
+        "excerpt": "Key Clause - Notice All notices must be sent by overnight courier and email to the parties listed on the signature page. Notice is effective on confirmed delivery."
+      }
+    ],
+    "referenced_case_numbers": [
+      "LND-88-204",
+      "PSL-2026-0142"
+    ],
+    "amounts": [
+      "$18,400,000.00"
+    ],
+    "low_confidence_sections": [
+      {
+        "line": "16",
+        "text": "4. [illegible] handwritten notation beside exception 7 appears to reference \"roof access\" but the scanned copy is unclear.",
+        "reason": "explicit illegibility marker"
+      }
+    ],
+    "missing_fields": []
+  },
+  "pages": [
+    {
+      "page_number": 1,
+      "text": "PEARSON SPECTER LITT - TITLE REVIEW PACKET\nMatter No: PSL-2026-0142\nClient: Ridge Harbor Capital LLC\nSeller: West 46th Street Holdings, Inc.\nBuyer: Ridge Harbor Capital LLC\nProperty: 1188 West 46th Street, New York, NY\n\nTitle Commitment dated April 24, 2026\nClosing target: May 20, 2026\nPurchase price: $18,400,000.00\n\nSchedule B - Exceptions\n1. Taxes for calendar year 2026 are not yet due and payable.\n2. Utility easement recorded in Liber 4102, Page 778 affects the rear five feet of the parcel.\n3. Mortgage satisfaction for prior lender appears pending; payoff letter references File No: LND-88-204.\n4. [illegible] handwritten notation beside exception 7 appears to reference \"roof access\" but the scanned copy is unclear.\n\nKey Clause - Closing Deliverables\nSeller must deliver a payoff letter, tenant estoppel certificates, assignment of service contracts, and an owner's affidavit before closing.\n\nKey Clause - Notice\nAll notices must be sent by overnight courier and email to the parties listed on the signature page. Notice is effective on confirmed delivery.",
+      "confidence": 0.85,
+      "extraction_method": "plain_text"
+    }
+  ],
+  "warnings": [],
+  "metadata": {
+    "processed_at": "2026-05-12T15:14:30+00:00",
+    "source_suffix": ".txt",
+    "page_count": 1
+  }
+}

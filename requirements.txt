@@ -1,0 +1,11 @@
+# Core workflow uses only Python standard library.
+# Optional but recommended for PDF/image sample generation and richer ingestion:
+PyMuPDF>=1.23
+Pillow>=10
+
+# Optional OCR backend:
+# Install the system tesseract binary, then uncomment if using Python wrapper.
+# pytesseract>=0.3.10
+
+# Optional test runner. The included tests also run with unittest.
+# pytest>=8
