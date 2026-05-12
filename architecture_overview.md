@@ -17,7 +17,7 @@ data/processed/*.json
    v
 Chunker + VectorStore
    - paragraph/window chunks
-   - local sparse TF-IDF embeddings
+   - local sparse TF-IDF embeddings (or optional sentence-transformers)
    - JSON-backed inspectable index
    |
    v
@@ -60,7 +60,7 @@ flowchart TD
 ## Component Mapping
 
 1. Document Processing: `DocumentProcessor`, `TesseractOCR`, and `StructuredDataExtractor` in `src/legal_ai_workflow/ingestion.py`.
-2. Grounded Retrieval: `Chunker`, `TfidfEmbeddingModel`, and `VectorStore` in `src/legal_ai_workflow/retrieval.py`.
+2. Grounded Retrieval: `Chunker`, `TfidfEmbeddingModel`, `SentenceTransformerEmbeddingModel`, and `VectorStore` in `src/legal_ai_workflow/retrieval.py`.
 3. Draft Generation: `DraftGenerator` in `src/legal_ai_workflow/generation.py`.
 4. Improvement from Edits: `FeedbackLearner` and `PreferenceStore` in `src/legal_ai_workflow/feedback.py`.
 5. Interfaces: CLI in `cli.py`; optional REST API in `api.py`.

@@ -50,6 +50,18 @@ Evidence trace files:
 
 Each evidence record includes source file, chunk ID, score, page, extraction confidence, extraction method, and passage text.
 
+## Manual Fact Check (Sample)
+
+| Fact | Expected Evidence | Supported? | Notes |
+|---|---|---|---|
+| Matter number PSL-2026-0142 is referenced in the notes. | [319c040caa6d-C002; p. 1] | Yes | Extracted from meeting notes. |
+| Notice letter dated May 1, 2026 from PSL to West 46th Street Holdings. | [2173674ed7c5-C001; p. 1] | Yes | Matches scan transcript header. |
+| Notices must be sent by overnight courier and email. | [e658ea3b0886-C004; p. 1] | Yes | Clause in title commitment excerpt. |
+| Schedule B exception includes a utility easement in Liber 4102, Page 778. | [e658ea3b0886-C003; p. 1] | Yes | Explicit exception text. |
+| Email chain states a 15-day cure period from receipt. | [d6be2f686ed2-C001; p. 1] | Yes | Listed in notice email chain. |
+
+Summary: 5/5 sampled facts were supported by retrieved evidence.
+
 ## Feedback Learning Results
 
 The demo creates a simulated operator edit and learns these reusable preferences in `data/preferences.json`:
@@ -80,6 +92,7 @@ The demo prints lightweight metrics for the baseline, improved, and round-two dr
 - Unit coverage verifies text ingestion, structured fields, retrieval-grounded drafting, and preference learning.
 - Unsupported generation is minimized by returning an insufficient-evidence message when no chunks are retrieved.
 - OCR-dependent failures are captured as warnings in processed JSON.
+- Optional semantic retrieval (sentence-transformers) is supported but not required for the default evaluation run.
 
 ## Residual Risk
 

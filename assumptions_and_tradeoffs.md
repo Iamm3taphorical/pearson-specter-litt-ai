@@ -10,7 +10,7 @@
 
 ## Simplifications
 
-- The default embedding model is local sparse TF-IDF rather than OpenAI or sentence-transformer embeddings. This keeps the demo dependency-light and inspectable, but semantic recall is weaker.
+- The default embedding model is local sparse TF-IDF. Optional sentence-transformers embeddings are supported, but semantic recall still trails domain-tuned legal models.
 - OCR confidence is a mix of Tesseract TSV confidence when available and conservative heuristics for embedded text.
 - Confidence scoring is heuristic-only and not statistically calibrated; it is intended for demo triage rather than formal quality assurance.
 - Structured extraction uses deterministic regex and keyword rules. It is easy to audit, but not as flexible as a document-understanding model.
@@ -29,3 +29,11 @@
 - Current chunking is paragraph/window based. For very long contracts, section-aware parsing would improve evidence precision.
 - The local generator can overquote source-like sentences because it is extractive. With an LLM configured, the prompt can produce smoother prose while preserving citations.
 - Learned preferences are global rather than per-reviewer or per-draft-type. A production system should scope preferences by user, client, jurisdiction, and draft type.
+
+## Limitations and Future Work
+
+- Add hybrid retrieval and reranking (BM25 + semantic + cross-encoder) to improve recall on long or ambiguous queries.
+- Upgrade OCR with layout-aware parsing (tables, headers, stamps) and confidence calibration for better auditability.
+- Introduce per-operator preference profiles and allow opt-in templates by draft type.
+- Expand evaluation with human review rubrics, fact-level precision/recall, and longitudinal improvement metrics.
+- Add structured field extraction models for parties, dates, and obligations beyond regex heuristics.

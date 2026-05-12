@@ -49,6 +49,17 @@ PYTHONPATH=src python -m legal_ai_workflow.cli index \
   --overlap-tokens 20
 ```
 
+Use optional semantic embeddings (sentence-transformers):
+
+```bash
+pip install sentence-transformers
+PYTHONPATH=src python -m legal_ai_workflow.cli index \
+  --processed-dir data/processed \
+  --index-dir data/index \
+  --embedding-model sentence-transformers \
+  --embedding-model-name all-MiniLM-L6-v2
+```
+
 Generate a grounded first-pass internal memo:
 
 ```bash
@@ -96,6 +107,12 @@ export OPENAI_MODEL=gpt-4o-mini
 ```
 
 Then run `draft` without `--no-llm`. The prompt forces use of retrieved evidence only, requires chunk citations, and tells the model to state gaps instead of inventing unsupported claims. If the API call fails, the system falls back to deterministic grounded generation.
+
+## Optional Semantic Retrieval
+
+To switch from sparse TF-IDF to semantic embeddings, install `sentence-transformers` and
+rebuild the index with `--embedding-model sentence-transformers`. The index metadata
+stores the chosen model so `draft` and the REST API use the same backend.
 
 ## Optional REST API
 

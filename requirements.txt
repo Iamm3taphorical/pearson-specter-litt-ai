@@ -7,5 +7,8 @@ Pillow>=10
 # Install the system tesseract binary, then uncomment if using Python wrapper.
 # pytesseract>=0.3.10
 
+# Optional semantic retrieval:
+# sentence-transformers>=2.6
+
 # Optional test runner. The included tests also run with unittest.
 # pytest>=8

@@ -45,6 +45,17 @@ def build_parser() -> argparse.ArgumentParser:
     index.add_argument("--index-dir", default="data/index")
     index.add_argument("--target-tokens", type=int, default=120)
     index.add_argument("--overlap-tokens", type=int, default=25)
+    index.add_argument(
+        "--embedding-model",
+        default="tfidf",
+        choices=("tfidf", "sentence-transformers"),
+        help="Embedding backend for retrieval.",
+    )
+    index.add_argument(
+        "--embedding-model-name",
+        default="all-MiniLM-L6-v2",
+        help="Sentence-transformers model name when using semantic embeddings.",
+    )
     index.set_defaults(func=cmd_index)
 
     draft = sub.add_parser("draft", help="Generate a grounded first-pass memo")
@@ -95,6 +106,8 @@ def cmd_index(args: argparse.Namespace) -> int:
         args.index_dir,
         target_tokens=int(args.target_tokens),
         overlap_tokens=int(args.overlap_tokens),
+        embedding_model=str(args.embedding_model),
+        embedding_model_name=str(args.embedding_model_name),
     )
     print(f"indexed {len(store.chunks)} chunks -> {Path(args.index_dir) / 'index.json'}")
     return 0
@@ -144,6 +157,8 @@ def cmd_run_demo(args: argparse.Namespace) -> int:
             index_dir=str(index_dir),
             target_tokens=60,
             overlap_tokens=20,
+            embedding_model="tfidf",
+            embedding_model_name="all-MiniLM-L6-v2",
         )
     )
 
